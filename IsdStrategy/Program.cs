@@ -19,9 +19,10 @@ namespace IsdStrategy
             Dictionary<string, ICommand> dic = new Dictionary<string, ICommand>();
             listCommandName.ForEach(n => dic.Add(n, listCommandCommand[listCommandName.IndexOf(n)])); //заполняет словарь сопоставляя одинаковые индексы имени и команды
             CommandContext commandContext = new CommandContext(dic);
+            //возможно стоит формировать набор команд в отдельном класе? который будет возвращать нужную команду по требованию (фабрика)
 
             listCommandName.ForEach(n => commandContext.ExecuteCommand(n, Directory.GetCurrentDirectory())); //вызываем команды согласно списка имен команд
-         
+            //почему мы вызываем все команды?
         }
     }
 }

@@ -9,14 +9,14 @@ namespace IsdStrategy.Commands
 {
     class CommandContext 
     {
-        public Dictionary<string,ICommand> ContextCommand { get; set; } //словарь команд
-        public CommandContext(Dictionary<string, ICommand> _contextCommand)
+        ICommand ContextCommand;
+        public CommandContext(ICommand _contextCommand)
         {
             ContextCommand = _contextCommand;
         }
-        public void ExecuteCommand(string key, string path, string param = null)
+        public void ExecuteCommand()
         {
-            ContextCommand[key].Command(path, param);
+            ContextCommand.Command();
         }
     }
 }

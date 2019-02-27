@@ -10,7 +10,13 @@ namespace IsdStrategy.Commands.FileCommands
 {
     class SearchByExt : ICommand
     {
-        public void Command(string path, string param)
+        protected string param { get; set; }
+        protected string path { get; set; }
+        public SearchByExt(string _path, string _param)
+        {
+            param = _param; path = _path;
+        }
+        public void Command()
         {
             if (param == null) param = ".cs";
             Directory.GetFiles(path, "*" + param).ToList().ForEach(p => Console.WriteLine(p));

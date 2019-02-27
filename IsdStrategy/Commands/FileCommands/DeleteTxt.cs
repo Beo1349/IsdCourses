@@ -10,10 +10,16 @@ namespace IsdStrategy.Commands.FileCommands
 {
     class DeleteTxt : ICommand
     {
-        public void Command(string path, string param = null)
+        protected string param { get; set; }
+        protected string path { get; set; }
+        public DeleteTxt(string _path, string _param)
         {
-            File.Delete(param + path + ".txt");
-            Console.WriteLine("\n\nDelete in {0} file {1} ok!\n\n",path, param + path + ".txt");
+            param = _param; path = _path;
+        }
+        public void Command()
+        {
+            File.Delete(path + param);
+            Console.WriteLine("\n\nDelete in {0} file {1} ok!\n\n",path, path + param);
         }
     }
 }

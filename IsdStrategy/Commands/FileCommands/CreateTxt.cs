@@ -10,11 +10,17 @@ namespace IsdStrategy.Commands.FileCommands
 {
     class CreateTxt : ICommand
     {
-        public void Command(string path, string param = null)
+        protected string param { get; set; }
+        protected string path { get; set; }
+        public CreateTxt(string _path, string _param)
         {
-            if (!File.Exists(param + path + ".txt"))
-            File.Create(param + path + ".txt").Dispose(); //нужен Dispose, т.к. после создания файл занят
-            Console.WriteLine("\n\nCreating in {0} file {1} ok!\n\n", path, param + path + ".txt");
+            param = _param; path = _path;
+        }
+        public void Command()
+        {
+            if (!File.Exists(path + param))
+            File.Create(path + param).Dispose(); //нужен Dispose, т.к. после создания файл занят
+            Console.WriteLine("\n\nCreating in {0} file {1} ok!\n\n", path, path + param + ".txt");
         }
     }
 }

@@ -8,6 +8,6 @@ namespace IsdStrategy.Commands.Interfaces
 {
     interface ICommand
     {
-        void Command(string path, string param);
+        void Command();
     }
 }

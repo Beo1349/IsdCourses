@@ -13,15 +13,17 @@ namespace IsdStrategy
 
     class Program
     {
+        static string ext = ".cpp";
+        static string txt = ".txt";
         static void Main(string[] args)
         {
             List<string> listCommandName = new List<string> { "Search", "SearchByExt", "CreateTxt", "DeleteTxt" };
-            List<ICommand> listCommandCommand = new List<ICommand> { new Search(Directory.GetCurrentDirectory()), new SearchByExt(Directory.GetCurrentDirectory(), ".cs"), new CreateTxt(Directory.GetCurrentDirectory(), ".txt"), new DeleteTxt(Directory.GetCurrentDirectory(), ".txt") };
+            List<ICommand> listCommandCommand = new List<ICommand> { new Search(Directory.GetCurrentDirectory()), new SearchByExt(Directory.GetCurrentDirectory(), ext), new CreateTxt(Directory.GetCurrentDirectory(), txt), new DeleteTxt(Directory.GetCurrentDirectory(), txt) };
 
             CommandFactory command = new CommandFactory(listCommandName, listCommandCommand);
 
-            listCommandName.ForEach(n => command.GetCommand(n)); //вызываем команды согласно списка имен команд
-         
+            listCommandName.ForEach(n => { Console.WriteLine("User передает Key: " + n); command.GetCommand(n); }); //вызываем команды согласно списка имен команд
+
             //вызываем все команды для проверки их работоспособности
         }
     }

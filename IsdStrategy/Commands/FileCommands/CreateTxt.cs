@@ -19,8 +19,8 @@ namespace IsdStrategy.Commands.FileCommands
         public void Command()
         {
             if (!File.Exists(path + param))
-            File.Create(path + param).Dispose(); //нужен Dispose, т.к. после создания файл занят
-            Console.WriteLine("\n\nCreating in {0} file {1} ok!\n\n", path, path + param + ".txt");
+                File.Create(path + param).Dispose(); //нужен Dispose, т.к. после создания файл занят
+            Console.WriteLine("\n\nCreating in " + path + " by " + param + " ok!\n\n");
         }
     }
 }

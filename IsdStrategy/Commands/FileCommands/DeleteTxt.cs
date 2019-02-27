@@ -19,7 +19,7 @@ namespace IsdStrategy.Commands.FileCommands
         public void Command()
         {
             File.Delete(path + param);
-            Console.WriteLine("\n\nDelete in {0} file {1} ok!\n\n",path, path + param);
+            Console.WriteLine("\n\nDelete in " + path + " ok!\n\n");
         }
     }
 }

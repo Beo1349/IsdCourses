@@ -20,7 +20,7 @@ namespace IsdStrategy.Commands.FileCommands
         {
             if (param == null) param = ".cs";
             Directory.GetFiles(path, "*" + param).ToList().ForEach(p => Console.WriteLine(p));
-            Console.WriteLine("\n\nSearch in {0} by {1} ok!\n\n",path, param);
+            Console.WriteLine("\n\nSearch in " + path + " by " + param + " ok!\n\n");
         }
     }
 }

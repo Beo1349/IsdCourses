@@ -50,6 +50,7 @@
     <Compile Include="Commands\FileCommands\Search.cs" />
     <Compile Include="Commands\FileCommands\SearchByExt.cs" />
     <Compile Include="Commands\Interfaces\ICommand.cs" />
+    <Compile Include="Console.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

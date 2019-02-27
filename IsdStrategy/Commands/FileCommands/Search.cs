@@ -19,7 +19,7 @@ namespace IsdStrategy.Commands.FileCommands
         public void Command()
         {
             Directory.GetFiles(path).ToList().ForEach(p => Console.WriteLine(p));
-            Console.WriteLine("\n\nSearch in {0} ok!\n\n", path);
+            Console.WriteLine("\n\nSearch in " + path + " ok!\n\n");
         }
     }
 }

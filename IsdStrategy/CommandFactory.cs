@@ -21,7 +21,16 @@ namespace IsdStrategy
         public void GetCommand(string key)
         {
             con = new CommandContext(dic[key]); //передает обьект из словаря в соответсвии с ключом в конструктор контекста
-            con.ExecuteCommand();
+            try
+            {
+                con.ExecuteCommand();
+            }
+            catch (Exception ex) //логирование исключений
+            {
+                Console.WriteLine(ex.Message + "\n");
+                Console.WriteLine(ex.StackTrace);
+            }
+
         }
     }
 }

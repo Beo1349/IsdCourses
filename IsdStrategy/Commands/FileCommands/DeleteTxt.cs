@@ -12,9 +12,9 @@ namespace IsdStrategy.Commands.FileCommands
     {
         protected string param { get; set; }
         protected string path { get; set; }
-        public DeleteTxt(string _path, string _param)
+        public DeleteTxt()
         {
-            param = _param; path = _path;
+            param = ".txt"; path = Directory.GetCurrentDirectory();
         }
         public void Command()
         {

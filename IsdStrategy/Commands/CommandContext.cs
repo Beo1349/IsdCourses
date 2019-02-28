@@ -10,13 +10,20 @@ namespace IsdStrategy.Commands
     class CommandContext 
     {
         ICommand ContextCommand;
-        public CommandContext(ICommand _contextCommand)
+        public CommandContext(object _contextCommand)
         {
-            ContextCommand = _contextCommand;
+            ContextCommand = (ICommand)_contextCommand;
         }
         public void ExecuteCommand()
         {
-            ContextCommand.Command();
+            try
+            {
+                ContextCommand.Command();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
     }
 }

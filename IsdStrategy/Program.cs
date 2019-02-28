@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -13,18 +14,22 @@ namespace IsdStrategy
 
     class Program
     {
-        static string ext = ".cpp";
-        static string txt = ".txt";
         static void Main(string[] args)
         {
-            List<string> listCommandName = new List<string> { "Search", "SearchByExt", "CreateTxt", "DeleteTxt" };
-            List<ICommand> listCommandCommand = new List<ICommand> { new Search(Directory.GetCurrentDirectory()), new SearchByExt(Directory.GetCurrentDirectory(), ext), new CreateTxt(Directory.GetCurrentDirectory(), txt), new DeleteTxt(Directory.GetCurrentDirectory(), txt) };
+            CommandFactory commandFactory = new CommandFactory();
 
-            CommandFactory command = new CommandFactory(listCommandName, listCommandCommand);
+            CommandContext command = new CommandContext(commandFactory.create_Type("Search")); //поиск
+            command.ExecuteCommand();
 
-            listCommandName.ForEach(n => { Console.WriteLine("User передает Key: " + n); command.GetCommand(n); }); //вызываем команды согласно списка имен команд
+            command = new CommandContext(commandFactory.create_Type("SearchByExt")); //поиск по расширению
+            command?.ExecuteCommand();
 
-            //вызываем все команды для проверки их работоспособности
+            command = new CommandContext(commandFactory.create_Type("CreateTxt")); //создание текстовика
+            command?.ExecuteCommand();
+
+            command = new CommandContext(commandFactory.create_Type("DeleteTxt")); //удаление тектовика
+            command?.ExecuteCommand();
+
         }
     }
 }

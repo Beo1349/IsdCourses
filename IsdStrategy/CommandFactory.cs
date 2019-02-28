@@ -4,6 +4,7 @@ using IsdStrategy.Commands.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -11,24 +12,29 @@ namespace IsdStrategy
 {
     class CommandFactory
     {
-        public Dictionary<string, ICommand> dic { get; set; }
-        private CommandContext con;
-        public CommandFactory(List<string> listCommandName, List<ICommand> listCommandCommand)
+        public Dictionary<string, Type> dic = new Dictionary<string, Type>();
+        public CommandFactory()
         {
-            dic = new Dictionary<string, ICommand>();
-            listCommandName.ForEach(n => dic.Add(n, listCommandCommand[listCommandName.IndexOf(n)])); //заполняет словарь сопоставляя одинаковые индексы имени и команды
+            var AssemblyTypes = from t in Assembly.GetExecutingAssembly().GetTypes()
+                               where t.GetInterfaces().Contains(typeof(ICommand))
+                               select t;
+            AssemblyTypes.ToList().ForEach(s => register_Type(s));
         }
-        public void GetCommand(string key)
+        public void register_Type(Type t)
         {
-            con = new CommandContext(dic[key]); //передает обьект из словаря в соответсвии с ключом в конструктор контекста
+            dic.Add(t.Name, t);            
+        }
+        public object create_Type(string Name)
+        {
             try
             {
-                con.ExecuteCommand();
+                return Activator.CreateInstance(dic[Name]);
+
             }
-            catch (Exception ex) //логирование исключений
+            catch (Exception ex)
             {
-                Console.WriteLine(ex.Message + "\n");
-                Console.WriteLine(ex.StackTrace);
+                Console.WriteLine(ex.Message);
+                return null;
             }
 
         }

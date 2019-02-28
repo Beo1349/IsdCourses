@@ -12,9 +12,9 @@ namespace IsdStrategy.Commands.FileCommands
     {
         protected string param { get; set; }
         protected string path { get; set; }
-        public Search(string _path, string _param = null)
+        public Search()
         {
-            param = _param; path = _path;
+            param = null; path = Directory.GetCurrentDirectory();
         }
         public void Command()
         {
